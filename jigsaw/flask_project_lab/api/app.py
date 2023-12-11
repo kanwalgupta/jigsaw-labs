@@ -1,6 +1,8 @@
 from flask import Flask
 from settings import DB_NAME, USER, PASSWORD
+from api import Park, Species
 import psycopg2
+import jsonify
 
 def create_app():
     app = Flask(__name__)
@@ -8,6 +10,10 @@ def create_app():
     app.config.from_mapping(
         DATABASE= DB_NAME
     )
+
+    @app.route('/')
+    def index():
+        return 'Welcome to the National Parks Database!'
 
     @app.route('/parks')
     def parks():
@@ -18,8 +24,13 @@ def create_app():
                 SELECT * FROM parks
                 '''
         cursor.execute(query)
-        parks = cursor.fetchall()
-        return parks
+        park_records = cursor.fetchall()
+        # parks = []
+        # for park_record in park_records:
+        #     #jsonify(value)
+        #     parks.append(Park(park_record))
+        # return [park.__dict__ for park in parks]
+        return [Park(values = park_record).__dict__ for park_record in park_records]
 
     @app.route('/species')
     def species():
@@ -29,8 +40,9 @@ def create_app():
                 SELECT * FROM species
                 '''
         cursor.execute(query)
-        species = cursor.fetchall()
-        return species
+        species_records = cursor.fetchall()
+        return [Species(values = species_record).__dict__ for species_record in species_records]
+        #return species
 
     @app.route('/species/<id>')
     def species_id(id):
@@ -43,7 +55,7 @@ def create_app():
                 '''
         cursor.execute(query, (id,))
         species_id = cursor.fetchall()
-        return species_id
+        return Species(values = species_id).__dict__
         #return id
 
     #return all animals by category within a park
@@ -62,8 +74,8 @@ def create_app():
                 '''
         #SELECT * FROM parks p INNER JOIN species s on p.park_code = SUBSTRING(species_id,1,4) WHERE park_code = 'ACAD' and category = 'Mammal';
         cursor.execute(query, (park,category.title())) #category is title case
-        species_id = cursor.fetchall()
-        return species_id
+        species_records = cursor.fetchall()
+        return [Species(values = species_record).__dict__ for species_record in species_records]
 
     return app
     #look into blueprint to separate out routes into a different file 
