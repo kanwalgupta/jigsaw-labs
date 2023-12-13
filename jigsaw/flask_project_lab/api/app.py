@@ -32,9 +32,26 @@ def create_app():
         # return [park.__dict__ for park in parks]
         return [Park(values = park_record).__dict__ for park_record in park_records]
 
+    @app.route('/parks/<park>/species')
+    def species_within_park(park):
+        conn = psycopg2.connect(database = app.config['DATABASE'])
+        cursor = conn.cursor()
+        query = '''
+                SELECT s.* 
+                FROM parks p
+                INNER JOIN species s
+                on p.park_code = SUBSTRING(species_id,1,4)
+                WHERE 
+                park_code = %s
+                '''
+        cursor.execute(query,(park,))
+        species_records = cursor.fetchall()
+        return [Species(values = species_record).__dict__ for species_record in species_records]
+
     @app.route('/species')
     def species():
-        conn = psycopg2.connect(database = 'national_parks', user = 'postgres', password = 'postgres')
+        #conn = psycopg2.connect(database = 'national_parks', user = 'postgres', password = 'postgres')
+        conn = psycopg2.connect(database = app.config['DATABASE'])
         cursor = conn.cursor()
         query = '''
                 SELECT * FROM species
@@ -45,15 +62,16 @@ def create_app():
         #return species
 
     @app.route('/species/<id>')
-    def species_id(id):
-        conn = psycopg2.connect(database = 'national_parks', user = 'postgres', password = 'postgres')
+    def species_id(species_id):
+        #conn = psycopg2.connect(database = 'national_parks', user = 'postgres', password = 'postgres')
+        conn = psycopg2.connect(database = app.config['DATABASE'])
         cursor = conn.cursor()
         query = '''
                 SELECT * 
                 FROM species
                 WHERE species_id = %s
                 '''
-        cursor.execute(query, (id,))
+        cursor.execute(query, (species_id,))
         species_id = cursor.fetchall()
         return Species(values = species_id).__dict__
         #return id
@@ -61,7 +79,8 @@ def create_app():
     #return all animals by category within a park
     @app.route('/species/<park>/<category>')
     def species_by_park_and_category(park,category):
-        conn = psycopg2.connect(database = 'national_parks', user = 'postgres', password = 'postgres')
+        #conn = psycopg2.connect(database = 'national_parks', user = 'postgres', password = 'postgres')
+        conn = psycopg2.connect(database = app.config['DATABASE'])
         cursor = conn.cursor()
         query = '''
                 SELECT s.* 
