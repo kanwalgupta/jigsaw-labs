@@ -44,6 +44,7 @@ def grimaldis():
     drop_all_tables(test_conn, test_cursor)
 
 def test_venue_location(grimaldis):
+    #breakpoint()
     assert grimaldis.location(test_cursor).address == '1 Front Street'
 
 def test_find_by_foursquare_id(grimaldis):

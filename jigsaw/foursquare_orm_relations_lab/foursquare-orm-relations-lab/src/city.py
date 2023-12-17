@@ -10,4 +10,14 @@ class City:
         for k, v in kwargs.items():
             setattr(self, k, v)
 
+    def state(self, cursor):
+        query = '''
+                SELECT *
+                FROM states
+                WHERE states.id = %s
+                '''
+        cursor.execute(query, (self.state_id,))
+        state_record = cursor.fetchone()
+        return build_from_record(State, state_record)
+
 
