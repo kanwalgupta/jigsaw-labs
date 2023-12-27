@@ -1,5 +1,8 @@
 from api import create_app
+from settings import DATABASE
 
-app = create_app()
+#print(DATABASE)
 
-app.run(Debug=True)
+app = create_app(DATABASE)
+
+app.run(debug=True)
