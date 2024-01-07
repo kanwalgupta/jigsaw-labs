@@ -4,6 +4,9 @@ from adapter import CoinAdapter
 
 client = Client()
 coin_records = client.make_request()
-coins = CoinAdapter().create_coin(coin_records)
+coins = CoinAdapter().create_coins(coin_records)
 
-print([coin.__dict__ for coin in coins])
+print(Coin.rank_by_price_change_percentage(coins))
+#print([coin.__dict__ for coin in coins])
+
+
