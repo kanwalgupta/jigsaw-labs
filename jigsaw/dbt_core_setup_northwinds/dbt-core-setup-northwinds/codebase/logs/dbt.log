@@ -1,0 +1,66 @@
+[0m19:29:36.765114 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'start', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x105c70a00>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x10775e6d0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x107782370>]}
+
+
+============================== 19:29:36.778700 | fa319708-dce6-45f8-9a00-9cb4ac0eea0b ==============================
+[0m19:29:36.778700 [info ] [MainThread]: Running with dbt=1.7.6
+[0m19:29:36.780077 [debug] [MainThread]: running dbt with arguments {'printer_width': '80', 'indirect_selection': 'eager', 'write_json': 'True', 'log_cache_events': 'False', 'partial_parse': 'True', 'cache_selected_only': 'False', 'warn_error': 'None', 'version_check': 'True', 'fail_fast': 'False', 'log_path': 'logs', 'profiles_dir': '/Users/jhom/.dbt', 'debug': 'False', 'use_colors': 'True', 'use_experimental_parser': 'False', 'no_print': 'None', 'quiet': 'False', 'warn_error_options': 'WarnErrorOptions(include=[], exclude=[])', 'static_parser': 'True', 'introspect': 'True', 'invocation_command': 'dbt init northwinds_dbt', 'target_path': 'None', 'log_format': 'default', 'send_anonymous_usage_stats': 'True'}
+[0m19:29:36.782484 [warn ] [MainThread]: [ConfigFolderDirectory]: Unable to parse dict {'dir': PosixPath('/Users/jhom/.dbt')}
+[0m19:29:36.783661 [info ] [MainThread]: Creating dbt configuration folder at 
+[0m19:29:36.786511 [debug] [MainThread]: Starter project path: /Users/jhom/jigsaw_repo/jigsaw/dbt_core_setup_northwinds/dbt-core-setup-northwinds/venv/lib/python3.9/site-packages/dbt/include/starter_project
+[0m19:29:36.907438 [info ] [MainThread]: 
+Your new dbt project "northwinds_dbt" was created!
+
+For more information on how to configure the profiles.yml file,
+please consult the dbt documentation here:
+
+  https://docs.getdbt.com/docs/configure-your-profile
+
+One more thing:
+
+Need help? Don't hesitate to reach out to us via GitHub issues or on Slack:
+
+  https://community.getdbt.com/
+
+Happy modeling!
+
+[0m19:29:36.908744 [info ] [MainThread]: Setting up your profile.
+[0m19:30:06.762562 [error] [MainThread]: Encountered an error:
+
+[0m19:30:06.804468 [error] [MainThread]: Traceback (most recent call last):
+  File "/Users/jhom/jigsaw_repo/jigsaw/dbt_core_setup_northwinds/dbt-core-setup-northwinds/venv/lib/python3.9/site-packages/dbt/cli/requires.py", line 91, in wrapper
+    result, success = func(*args, **kwargs)
+  File "/Users/jhom/jigsaw_repo/jigsaw/dbt_core_setup_northwinds/dbt-core-setup-northwinds/venv/lib/python3.9/site-packages/dbt/cli/requires.py", line 76, in wrapper
+    return func(*args, **kwargs)
+  File "/Users/jhom/jigsaw_repo/jigsaw/dbt_core_setup_northwinds/dbt-core-setup-northwinds/venv/lib/python3.9/site-packages/dbt/cli/main.py", line 515, in init
+    results = task.run()
+  File "/Users/jhom/jigsaw_repo/jigsaw/dbt_core_setup_northwinds/dbt-core-setup-northwinds/venv/lib/python3.9/site-packages/dbt/task/init.py", line 344, in run
+    self.setup_profile(profile_name)
+  File "/Users/jhom/jigsaw_repo/jigsaw/dbt_core_setup_northwinds/dbt-core-setup-northwinds/venv/lib/python3.9/site-packages/dbt/task/init.py", line 263, in setup_profile
+    adapter = self.ask_for_adapter_choice()
+  File "/Users/jhom/jigsaw_repo/jigsaw/dbt_core_setup_northwinds/dbt-core-setup-northwinds/venv/lib/python3.9/site-packages/dbt/task/init.py", line 244, in ask_for_adapter_choice
+    numeric_choice = click.prompt(prompt_msg, type=click.INT)
+  File "/Users/jhom/jigsaw_repo/jigsaw/dbt_core_setup_northwinds/dbt-core-setup-northwinds/venv/lib/python3.9/site-packages/click/termui.py", line 164, in prompt
+    value = prompt_func(prompt)
+  File "/Users/jhom/jigsaw_repo/jigsaw/dbt_core_setup_northwinds/dbt-core-setup-northwinds/venv/lib/python3.9/site-packages/click/termui.py", line 147, in prompt_func
+    raise Abort() from None
+click.exceptions.Abort
+
+[0m19:30:06.821614 [debug] [MainThread]: Resource report: {"command_name": "init", "command_wall_clock_time": 30.157099, "process_user_time": 4.512557, "process_kernel_time": 0.85994, "process_mem_max_rss": "88588288", "command_success": false, "process_in_blocks": "0", "process_out_blocks": "0"}
+[0m19:30:06.822863 [debug] [MainThread]: Command `dbt init` failed at 19:30:06.822566 after 30.16 seconds
+[0m19:30:06.823676 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'end', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x105c70a00>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x107782c10>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x107782cd0>]}
+[0m19:30:06.825242 [debug] [MainThread]: Flushing usage events
+[0m19:47:00.285727 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'start', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x108468a90>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x109fb42e0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x109fa1eb0>]}
+
+
+============================== 19:47:00.295775 | d8bbdb0c-2bfc-4732-a9f8-f78cd96ae398 ==============================
+[0m19:47:00.295775 [info ] [MainThread]: Running with dbt=1.7.6
+[0m19:47:00.296898 [debug] [MainThread]: running dbt with arguments {'printer_width': '80', 'indirect_selection': 'eager', 'log_cache_events': 'False', 'write_json': 'True', 'partial_parse': 'True', 'cache_selected_only': 'False', 'profiles_dir': '/Users/jhom/.dbt', 'debug': 'False', 'version_check': 'True', 'log_path': 'logs', 'warn_error': 'None', 'fail_fast': 'False', 'use_colors': 'True', 'use_experimental_parser': 'False', 'no_print': 'None', 'quiet': 'False', 'warn_error_options': 'WarnErrorOptions(include=[], exclude=[])', 'introspect': 'True', 'static_parser': 'True', 'log_format': 'default', 'target_path': 'None', 'invocation_command': 'dbt run', 'send_anonymous_usage_stats': 'True'}
+[0m19:47:00.298377 [error] [MainThread]: Encountered an error:
+Runtime Error
+  No dbt_project.yml found at expected path /Users/jhom/jigsaw_repo/jigsaw/dbt_core_setup_northwinds/dbt-core-setup-northwinds/codebase/dbt_project.yml
+  Verify that each entry within packages.yml (and their transitive dependencies) contains a file named dbt_project.yml
+  
+[0m19:47:00.302587 [debug] [MainThread]: Resource report: {"command_name": "run", "command_wall_clock_time": 0.1737834, "process_user_time": 4.154927, "process_kernel_time": 0.765379, "process_mem_max_rss": "88203264", "command_success": false, "process_in_blocks": "0", "process_out_blocks": "0"}
+[0m19:47:00.305132 [debug] [MainThread]: Command `dbt run` failed at 19:47:00.304498 after 0.18 seconds
+[0m19:47:00.306486 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'end', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x108468a90>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x109f7a550>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x1099a15e0>]}
+[0m19:47:00.308420 [debug] [MainThread]: Flushing usage events
