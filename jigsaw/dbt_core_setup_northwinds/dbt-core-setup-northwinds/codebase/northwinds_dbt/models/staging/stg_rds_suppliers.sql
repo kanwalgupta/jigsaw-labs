@@ -14,9 +14,34 @@ renamed AS (
       region,
       postal_code,
       country,
-      phone,
+      --phone,
       fax,
       homepage
     FROM source
+),
+phone_digits AS (
+    SELECT 
+      supplier_id,
+      REGEXP_REPLACE(phone, '[^0-9]', '', 'g')  AS phone_digits,
+      LENGTH(REGEXP_REPLACE(phone, '[^0-9]', '', 'g')) AS phone_length
+    FROM source  
+),
+valid_phone AS (
+    SELECT
+      supplier_id, 
+      CONCAT(
+        '(',
+        SUBSTR(phone_digits,1,3),
+        ')',
+        ' ',
+        SUBSTR(phone_digits,4,3),
+        '-',
+        SUBSTR(phone_digits,6,4)
+      ) AS phone
+    FROM phone_digits
+    WHERE phone_length = 10
 )
-SELECT * FROM renamed
+SELECT renamed.*, valid_phone.phone
+FROM renamed
+  INNER JOIN valid_phone 
+  ON renamed.supplier_id = valid_phone.supplier_id
