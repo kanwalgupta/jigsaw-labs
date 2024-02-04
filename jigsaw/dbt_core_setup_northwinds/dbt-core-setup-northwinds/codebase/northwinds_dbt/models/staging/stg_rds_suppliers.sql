@@ -1,6 +1,6 @@
 WITH source AS (
     SELECT *
-    FROM suppliers
+    FROM {{source("rds","suppliers")}}
 ),
 renamed AS (
     SELECT

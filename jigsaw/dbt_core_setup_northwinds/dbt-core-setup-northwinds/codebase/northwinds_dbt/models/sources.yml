@@ -1,7 +1,8 @@
 version: 2
 sources:
-  - name: postgres
+  - name: rds
     database: northwinds
     schema: public
     tables:
-      - name: categories
+      - name: suppliers
+      - name: customers

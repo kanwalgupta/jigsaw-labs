@@ -1,13 +1,29 @@
-WITH source AS (
-    SELECT * 
-    FROM public.customers
-), -- import CTE
-renamed AS (
+WITH customers as (
+  SELECT * FROM {{ source('rds', 'customers')}} 
+), 
+companies as (
+  SELECT * FROM {{ ref('stg_rds_companies')}}
+),
+renamed as (
     SELECT 
-      customer_id,
-      country,
-      split_part(contact_name, ' ', 1) AS first_name,
-      split_part(contact_name, ' ', 2) AS last_name
-    FROM source
-) -- logical CTE
-SELECT * FROM renamed --final select
+    concat('rds-', customer_id) as customer_id, 
+    SPLIT_PART(contact_name, ' ', 1) as first_name,
+    SPLIT_PART(contact_name, ' ', -1) as last_name,
+    REPLACE(TRANSLATE(phone, '(,),-,.', ''), ' ', '') as updated_phone,
+    company_id
+    FROM customers 
+    JOIN companies ON companies.company_name = customers.company_name 
+), final as 
+ (SELECT
+   customer_id,
+   first_name,
+   last_name,
+   CASE WHEN LENGTH(updated_phone) = 10 THEN
+       '(' || SUBSTRING(updated_phone, 1, 3) || ') ' || 
+       SUBSTRING(updated_phone, 4, 3) || '-' ||
+       SUBSTRING(updated_phone, 7, 4) 
+       END as phone,
+   company_id
+  FROM renamed
+)
+SELECT * FROM final
