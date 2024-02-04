@@ -12,9 +12,10 @@ renamed as (
     REPLACE(TRANSLATE(phone, '(,),-,.', ''), ' ', '') as updated_phone,
     company_id
     FROM customers 
-    JOIN companies ON companies.company_name = customers.company_name 
-), final as 
- (SELECT
+    JOIN companies ON companies.name = customers.company_name 
+), 
+final as (
+  SELECT
    customer_id,
    first_name,
    last_name,

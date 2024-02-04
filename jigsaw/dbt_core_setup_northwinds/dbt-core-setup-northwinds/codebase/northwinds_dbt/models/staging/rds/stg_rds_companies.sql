@@ -5,13 +5,13 @@ WITH source AS (
 renamed AS (
     SELECT 
       concat('rds-',replace(lower(company_name), ' ', '-')) as company_id,
-      company_name,
+      company_name AS name,
       MAX(address) AS address,
       MAX(city) AS city,
       MAX(postal_code) AS postal_code,
       MAX(country) AS country
     FROM source
-    GROUP BY company_name
+    GROUP BY name
 )
 SELECT *
 FROM renamed
